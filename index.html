@@ -70,40 +70,40 @@
                 return true;
             },
             _getDataForTime: function(time) {
-                    delete this._currentTimeData.data;
-                    this._currentTimeData.data = [];
-                    var data = this.data[time-1];
-                    for (var i = 0; i < data.length; i++) {
-                        this._currentTimeData.data.push({
-                                lat: data[i][0],
-                                lng: data[i][1],
-                                count: data[i].length>2 ? data[i][2] : this.defaultWeight
-                            });
-                        }
-                    this._currentLoadedTime = time;
-                    if (this._timeDimension && time == this._timeDimension.getCurrentTime() && !this._timeDimension.isLoading()) {
-                        this._update();
-                    }
-                    this.fire('timeload', {
-                        time: time
+                delete this._currentTimeData.data;
+                this._currentTimeData.data = [];
+                var data = this.data[time-1];
+                for (var i = 0; i < data.length; i++) {
+                    this._currentTimeData.data.push({
+                            lat: data[i][0],
+                            lng: data[i][1],
+                            count: data[i].length>2 ? data[i][2] : this.defaultWeight
                     });
                 }
+                this._currentLoadedTime = time;
+                if (this._timeDimension && time == this._timeDimension.getCurrentTime() && !this._timeDimension.isLoading()) {
+                    this._update();
+                }
+                this.fire('timeload', {
+                    time: time
+                });
+            }
             });
 
             L.Control.TimeDimensionCustom = L.Control.TimeDimension.extend({
-                initialize: function(index, options) {
-                    var playerOptions = {
-                        buffer: 1,
-                        minBufferReady: -1
-                        };
-                    options.playerOptions = $.extend({}, playerOptions, options.playerOptions || {});
-                    L.Control.TimeDimension.prototype.initialize.call(this, options);
-                    this.index = index;
-                    },
-                _getDisplayDateFormat: function(date){
-                    return this.index[date.getTime()-1];
-                    }
-                });
+            initialize: function(index, options) {
+                var playerOptions = {
+                    buffer: 1,
+                    minBufferReady: -1
+                    };
+                options.playerOptions = $.extend({}, playerOptions, options.playerOptions || {});
+                L.Control.TimeDimension.prototype.initialize.call(this, options);
+                this.index = index;
+                },
+            _getDisplayDateFormat: function(date){
+                return this.index[date.getTime()-1];
+                }
+            });
         </script>
                     
     </head>
@@ -113,6 +113,7 @@
         <!--External script links -->
         <script type="text/javascript" src="js/btbwar.js"></script>
         <script type="text/javascript" src="js/pipplo.js"></script>
+        <script type="text/javascript" src="js/acafly.js"></script>
 
         <script type="text/javascript" src="js/main.js"></script>
     </body>
