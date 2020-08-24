@@ -18,8 +18,8 @@ function createMap(){
 
     //add OSM base tilelayer
     var tile_layer = L.tileLayer(
-        'https://{s}.tile.openstreetmap.de/tiles/osmde/{z}/{x}/{y}.png',
-        { "attribution": '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'}
+        'https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}',
+        { "attribution": 'Tiles &copy; Esri &mdash; Esri'}
     ).addTo(map);
 
     // Create Tools
@@ -27,7 +27,7 @@ function createMap(){
     createDataControl()
 
     // Setup starting map
-    heatmap = BTBWAR_heat_map;
+    heatmap = ACAFLY_heat_map;
     heatmap.addTo(map);
 };
 
@@ -72,9 +72,13 @@ function createDataControl(){
             //create radio button for the two data
             $(container).append(
                 '<select id="birdSelector"> \
-                    <option value="btbwar">Black-throated Blue Warbler</option> \
-                    <option value="pipplo">Piping Plover</option> \
                     <option value="acafly">Acadian Flycatcher</option> \
+                    <option value="balori">Baltimore Oriole</option> \
+                    <option value="btbwar">Black-throated Blue Warbler</option> \
+                    <option value="magwar">Magnolia Warbler</option> \
+                    <option value="pipplo">Piping Plover</option> \
+                    <option value="sancra">Sandhill Crane</option> \
+                    <option value="yelwar">Yellow Warbler</option> \
                 </select>');
 
             L.DomEvent.disableClickPropagation(container);
@@ -89,12 +93,20 @@ function createDataControl(){
              map.removeLayer(heatmap);
     
             //Change the selected data
-            if ($(this.value).selector == 'btbwar'){
-                heatmap = BTBWAR_heat_map; // Black-throated Blue Warbler
-            } else if ($(this.value).selector == 'pipplo'){
-                heatmap = PIPPLO_heat_map; // Piping Plover
-            } else if ($(this.value).selector == 'acafly'){
+            if ($(this.value).selector == 'acafly'){
                 heatmap = ACAFLY_heat_map; // Acadian Flycatcher
+            } else if ($(this.value).selector == 'balori'){
+                heatmap = BALORI_heat_map; // Baltimore Oriole
+            }else if ($(this.value).selector == 'btbwar'){
+                heatmap = BTBWAR_heat_map; // Black-throated Blue Warbler
+            } else if ($(this.value).selector == 'magwar'){
+                heatmap = MAGWAR_heat_map; // Magnolia Warbler
+            }else if ($(this.value).selector == 'pipplo'){
+                heatmap = PIPPLO_heat_map; // Piping Plover
+            } else if ($(this.value).selector == 'sancra'){
+                heatmap = SANCRA_heat_map; // Sandhill Crane
+            }else if ($(this.value).selector == 'yelwar'){
+                heatmap = YELWAR_heat_map; // Yellow Warbler
             };
     
             //Update data shown
