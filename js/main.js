@@ -3,18 +3,25 @@ var map;
 var times = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
 var heatmap;
 
+var buttons = [
+    L.easyButton('<img src="img/noun_Home_731233_blk.svg">', function(){
+        map.setView([32.748357, -88.723449], 4);
+    },'zoom to original extent',{ position: 'topleft' }),
+];
+
 //Function to instantiate the Leaflet map
 function createMap(){
     //create the map
     myBounds = new L.LatLngBounds(new L.LatLng(60, 0), new L.LatLng(30, 0));
     map = L.map("map", {
-        center: [32.748357, -81.723449],
+        center: [32.748357, -88.723449],
         crs: L.CRS.EPSG3857,
         zoom: 4,
         zoomControl: true,
         preferCanvas: false,
     });
     L.control.scale().addTo(map);
+    L.easyBar(buttons).addTo(map);
 
     //add OSM base tilelayer
     var tile_layer = L.tileLayer(
@@ -27,7 +34,7 @@ function createMap(){
     createDataControl()
 
     // Setup starting map
-    heatmap = ACAFLY_heat_map;
+    heatmap = COMLOO_heat_map;
     heatmap.addTo(map);
 };
 
@@ -48,7 +55,7 @@ function timeControl(){
         maxSpeed: 10,
         minSpeed: 0.1,
         playButton: true,
-        playReverseButton: true,
+        playReverseButton: false,
         position: "bottomleft",
         speedSlider: true,
         speedStep: 0.1,
@@ -72,13 +79,28 @@ function createDataControl(){
             //create radio button for the two data
             $(container).append(
                 '<select id="birdSelector"> \
+                    <optgroup label="Loons and Grebes"> \
+                        <option value="comloo">Common Loon</option> \
+                        <option value="pibgre">Pied-billed Grebe</option> \
+                    </optgroup> \
+                    <optgroup label="Waterfowl"> \
+                        <option value="cangoo">Canada Goose</option> \
+                        <option value="norpin">Northern Pintail</option> \
+                    </optgroup> \
+                    //<option value="doccor">Double-crested Cormorant</option> \
                     <option value="acafly">Acadian Flycatcher</option> \
                     <option value="balori">Baltimore Oriole</option> \
-                    <option value="btbwar">Black-throated Blue Warbler</option> \
-                    <option value="magwar">Magnolia Warbler</option> \
+                    <option value="chiswi">Chimney Swift</option> \
+                    <option value="amewoo">American Woodcock</option> \
+                    <option value="killde">Killdeer</option> \
                     <option value="pipplo">Piping Plover</option> \
+                    <option value="rthhum">Ruby-throated Hummingbird</option> \
                     <option value="sancra">Sandhill Crane</option> \
-                    <option value="yelwar">Yellow Warbler</option> \
+                    <optgroup label="Warblers"> \
+                        <option value="btbwar">Black-throated Blue Warbler</option> \
+                        <option value="magwar">Magnolia Warbler</option> \
+                        <option value="yelwar">Yellow Warbler</option> \
+                    </optgroup> \
                 </select>');
 
             L.DomEvent.disableClickPropagation(container);
@@ -91,23 +113,14 @@ function createDataControl(){
          //Click listener for buttons
          $("#birdSelector").change(function(){
              map.removeLayer(heatmap);
+
+             heatmap = window[($(this.value).selector).toUpperCase() + "_heat_map"];
     
             //Change the selected data
-            if ($(this.value).selector == 'acafly'){
-                heatmap = ACAFLY_heat_map; // Acadian Flycatcher
-            } else if ($(this.value).selector == 'balori'){
-                heatmap = BALORI_heat_map; // Baltimore Oriole
-            }else if ($(this.value).selector == 'btbwar'){
-                heatmap = BTBWAR_heat_map; // Black-throated Blue Warbler
-            } else if ($(this.value).selector == 'magwar'){
-                heatmap = MAGWAR_heat_map; // Magnolia Warbler
-            }else if ($(this.value).selector == 'pipplo'){
-                heatmap = PIPPLO_heat_map; // Piping Plover
-            } else if ($(this.value).selector == 'sancra'){
-                heatmap = SANCRA_heat_map; // Sandhill Crane
-            }else if ($(this.value).selector == 'yelwar'){
-                heatmap = YELWAR_heat_map; // Yellow Warbler
-            };
+            // if ($(this.value).selector == 'acafly'){
+            //     heatmap = ACAFLY_heat_map; // Acadian Flycatcher
+            // } else if ($(this.value).selector == 'balori'){
+            //     heatmap = BALORI_heat_map; // Baltimore Oriole
     
             //Update data shown
             heatmap.addTo(map);
@@ -117,3 +130,7 @@ function createDataControl(){
 
 
 $(document).ready(createMap);
+$(".leaflet-time-control" ).click(function() {
+    alert();
+    $( ".timecontrol-loop" ).trigger( "click" );
+});

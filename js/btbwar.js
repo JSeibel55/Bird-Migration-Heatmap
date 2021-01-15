@@ -7,7 +7,7 @@ var BTBWAR_heat_map = new TDHeatmap([[[6.8750189, -73.39727640000001, 1.0], [8.6
             scaleRadius: false,
             useLocalExtrema: true,
             defaultWeight: 1,
-            gradient: { 0.2: 'blue', 0.4: 'lime', 0.6: 'orange', 1: 'red' }
+            gradient: {0.01: 'blue', 0.05: 'lime', 0.25: 'yellow', 0.5: 'orange', 1: 'red'}
         }
     })
 
