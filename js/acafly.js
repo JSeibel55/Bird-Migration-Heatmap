@@ -9,3 +9,4 @@ var ACAFLY_heat_map = new TDHeatmap([[[-3.653953, -79.768028, 5.0], [-2.78592, -
                         gradient: {0.01: 'blue', 0.05: 'lime', 0.25: 'yellow', 0.5: 'orange', 1: 'red'}
                     }
                 })
+// export { ACAFLY_heat_map };

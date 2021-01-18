@@ -9,3 +9,4 @@ var PIPPLO_heat_map = new TDHeatmap([[[18.507928500000002, -67.0141717, 2.0], [1
                         gradient: {0.01: 'blue', 0.05: 'lime', 0.25: 'yellow', 0.5: 'orange', 1: 'red'}
                     }
                 })
+// export { PIPPLO_heat_map };

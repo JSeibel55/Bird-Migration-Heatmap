@@ -12,11 +12,13 @@ var buttons = [
 //Function to instantiate the Leaflet map
 function createMap(){
     //create the map
-    myBounds = new L.LatLngBounds(new L.LatLng(60, 0), new L.LatLng(30, 0));
+    var myBounds = new L.LatLngBounds(new L.LatLng(60, 0), new L.LatLng(30, 0));
     map = L.map("map", {
         center: [32.748357, -88.723449],
         crs: L.CRS.EPSG3857,
         zoom: 4,
+        maxZoom: 6,
+        minZoom: 3,
         zoomControl: true,
         preferCanvas: false,
     });
@@ -44,7 +46,7 @@ function timeControl(){
         { times: times, currentTime: new Date(1) }
     );
 
-    var heat_map_Control = new L.Control.TimeDimensionCustom(['Jan', 'Feb', 'Mar', 'Apr', 'May', 'June', 'July', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec'], {
+    var heat_map_Control = new L.Control.TimeDimensionCustom(['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'], {
         autoPlay: false,
         backwardButton: true,
         displayDate: true,
@@ -85,21 +87,61 @@ function createDataControl(){
                     </optgroup> \
                     <optgroup label="Waterfowl"> \
                         <option value="cangoo">Canada Goose</option> \
+                        <option value="amewig">American Wigeon</option> \
+                        <option value="buwtea">Blue-winged Teal</option> \
+                        <option value="buffle">Bufflehead</option> \
                         <option value="norpin">Northern Pintail</option> \
+                        <option value="norsho">Northern Shoveler</option> \
                     </optgroup> \
-                    //<option value="doccor">Double-crested Cormorant</option> \
-                    <option value="acafly">Acadian Flycatcher</option> \
-                    <option value="balori">Baltimore Oriole</option> \
-                    <option value="chiswi">Chimney Swift</option> \
-                    <option value="amewoo">American Woodcock</option> \
-                    <option value="killde">Killdeer</option> \
-                    <option value="pipplo">Piping Plover</option> \
-                    <option value="rthhum">Ruby-throated Hummingbird</option> \
-                    <option value="sancra">Sandhill Crane</option> \
+                    <optgroup label="Cormorants"> \
+                        <option value="doccor">Double-crested Cormorant</option> \
+                    </optgroup> \
+                    <optgroup label="Wading Birds and Gruiformes"> \
+                        <option value="grbher">Great Blue Heron</option> \
+                        <option value="greegr">Great Egret</option> \
+                        <option value="sancra">Sandhill Crane</option> \
+                    </optgroup> \
+                    <optgroup label="Raptors"> \
+                        <option value="baleag">Bald Eagle</option> \
+                        <option value="brwhaw">Broad-winged Hawk</option> \
+                        <option value="norhar">Northern Harrier</option> \
+                        <option value="osprey">Osprey</option> \
+                        <option value="turvul">Turkey Vulture</option> \
+                    </optgroup> \
+                    <optgroup label="Shorebirds"> \
+                        <option value="killde">Killdeer</option> \
+                        <option value="pipplo">Piping Plover</option> \
+                        <option value="amewoo">American Woodcock</option> \
+                    </optgroup> \
+                    <optgroup label="Terns"> \
+                        <option value="blkter">Black Terns</option> \
+                        <option value="comter">Common Tern</option> \
+                    </optgroup> \
+                    <optgroup label="Swifts and Swallows"> \
+                        <option value="chiswi">Chimney Swift</option> \
+                    </optgroup> \
+                    <optgroup label="Hummingbirds"> \
+                        <option value="rthhum">Ruby-throated Hummingbird</option> \
+                    </optgroup> \
+                    <optgroup label="Kingfishers"> \
+                        <option value="belkin">Belted Kingfisher</option> \
+                    </optgroup> \
+                    <optgroup label="Flycatchers"> \
+                        <option value="acafly">Acadian Flycatcher</option> \
+                    </optgroup> \
+                    <optgroup label="Thrushes"> \
+                    </optgroup> \
+                    <optgroup label="Sparrows"> \
+                    </optgroup> \
+                    <optgroup label="Icterids"> \
+                        <option value="balori">Baltimore Oriole</option> \
+                    </optgroup> \
                     <optgroup label="Warblers"> \
                         <option value="btbwar">Black-throated Blue Warbler</option> \
                         <option value="magwar">Magnolia Warbler</option> \
                         <option value="yelwar">Yellow Warbler</option> \
+                    </optgroup> \
+                    <optgroup label="Finches"> \
                     </optgroup> \
                 </select>');
 
@@ -112,16 +154,19 @@ function createDataControl(){
 
          //Click listener for buttons
          $("#birdSelector").change(function(){
-             map.removeLayer(heatmap);
-
-             heatmap = window[($(this.value).selector).toUpperCase() + "_heat_map"];
+            map.removeLayer(heatmap);
+            
+            $("head").append('<script type="text/javascript" src=js/' + $(this.value).selector + '.js></script>');
+            heatmap = window[($(this.value).selector).toUpperCase() + "_heat_map"];
+            // heatmap = eval(($(this.value).selector).toUpperCase() + "_heat_map");
     
             //Change the selected data
             // if ($(this.value).selector == 'acafly'){
             //     heatmap = ACAFLY_heat_map; // Acadian Flycatcher
-            // } else if ($(this.value).selector == 'balori'){
-            //     heatmap = BALORI_heat_map; // Baltimore Oriole
-    
+            // } else if ($(this.value).selector == 'pipplo'){
+            //     heatmap = PIPPLO_heat_map; // Baltimore Oriole
+            // }
+
             //Update data shown
             heatmap.addTo(map);
         });

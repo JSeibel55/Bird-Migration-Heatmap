@@ -9,3 +9,4 @@ var AMEWOO_heat_map = new TDHeatmap([[[25.220474, -80.842816, 1.0], [25.3712306,
                         gradient: {0.01: 'blue', 0.05: 'lime', 0.25: 'yellow', 0.5: 'orange', 1: 'red'}
                     }
                 })
+// export { AMEWOO_heat_map };
