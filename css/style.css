@@ -2,20 +2,85 @@ html, body {width: 100%;height: 100%;margin: 0;padding: 0;}
 
 /* #map {position:absolute;top:0;bottom:0;right:0;left:0;} */
 #map {
-    position: relative;
-    width: 100.0%;
-    height: 100.0%;
-    left: 0.0%;
-    top: 0.0%;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  left: 0%;
+  top: 0%;
+  z-index: 1;
+  flex: 1;
 }
 
 #birdSelector {
-    font-family: Georgia, serif;
-    font-size: 20px;
-    padding: 3px;
-    background-color: rgb(252, 252, 252);
+  font-family: Georgia, serif;
+  font-size: 20px;
+  padding: 3px;
+  background-color: rgb(252, 252, 252);
 }
 
+/*** Time Control ***/
+.timecontrol-date {
+  font-size: 20px;
+}
+
+/*** Loading Screen ***/
+#loadingScreen {
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(192, 192, 192, 0.5);
+  background-repeat: no-repeat;
+  background-position: center;
+}
+#spinner,
+#spinner:after {
+  border-radius: 50%;
+  width: 10em;
+  height: 10em;
+}
+#spinner {
+  display: none;
+  z-index: 100;
+  margin: 60px auto;
+  font-size: 10px;
+  position: absolute;
+  left: 50vw;
+  top: 35vh;
+  text-indent: -9999em;
+  border-top: 1.1em solid rgba(255, 255, 255, 0.2);
+  border-right: 1.1em solid rgba(255, 255, 255, 0.2);
+  border-bottom: 1.1em solid rgba(255, 255, 255, 0.2);
+  border-left: 1.1em solid #353535;
+  -webkit-transform: translateZ(0);
+  -ms-transform: translateZ(0);
+  transform: translateZ(0);
+  -webkit-animation: load8 1.1s infinite linear;
+  animation: load8 1.1s infinite linear;
+}
+@-webkit-keyframes load8 {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+@keyframes load8 {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
 
 /*** L.easyButton ***/
 .leaflet-bar button,

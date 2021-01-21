@@ -21,6 +21,7 @@ function createMap(){
         minZoom: 3,
         zoomControl: true,
         preferCanvas: false,
+        maxBounds: [[80, -200], [-80, 200]],
     });
     L.control.scale().addTo(map);
     L.easyBar(buttons).addTo(map);
@@ -36,7 +37,7 @@ function createMap(){
     createDataControl()
 
     // Setup starting map
-    heatmap = COMLOO_heat_map;
+    heatmap = heat_map;
     heatmap.addTo(map);
 };
 
@@ -80,68 +81,140 @@ function createDataControl(){
 
             //create radio button for the two data
             $(container).append(
-                '<select id="birdSelector"> \
-                    <optgroup label="Loons and Grebes"> \
-                        <option value="comloo">Common Loon</option> \
-                        <option value="pibgre">Pied-billed Grebe</option> \
+                '<select name="birdSelector" id="birdSelector"> \
+                <option value="default">-- Choose a bird --</option> \
+                <optgroup label="Raptors"> \
+                        <option value="amekes">American Kestrel</option> \
+                        <option value="baleag">Bald Eagle</option> \
+                        <option value="coohaw">Coopers Hawk</option> \
+                        <option value="goleag">Golden Eagle</option> \
+                        <option value="merlin">Merlin</option> \
+                        <option value="norgos">Northern Goshawk</option> \
+                        <option value="nswowl">Northern Saw-whet Owl</option> \
+                        <option value="osprey">Osprey</option> \
+                        <option value="perfal">Peregrine Falcon</option> \
+                        <option value="rethaw">Red-tailed Hawk</option> \
                     </optgroup> \
-                    <optgroup label="Waterfowl"> \
-                        <option value="cangoo">Canada Goose</option> \
-                        <option value="amewig">American Wigeon</option> \
-                        <option value="buwtea">Blue-winged Teal</option> \
-                        <option value="buffle">Bufflehead</option> \
-                        <option value="norpin">Northern Pintail</option> \
-                        <option value="norsho">Northern Shoveler</option> \
+                    <optgroup label="Shorebirds"> \
+                        <option value="lobcur">Long-billed Curlew</option> \
+                        <option value="pipplo">Piping Plover</option> \
+                        <option value="redkno">Red Knot</option> \
+                        <option value="rudtur">Ruddy Turnstone</option> \
+                        <option value="sander">Sanderling</option> \
+                        <option value="shbdow">Short-billed Dowitcher</option> \
+                    </optgroup> \
+                    <optgroup label="Terns"> \
+                        <option value="comter">Common Tern</option> \
+                        <option value="leater">Least Tern</option> \
+                        <option value="royter">Royal Tern</option> \
+                        <option value="santer">Sandwich Tern</option> \
                     </optgroup> \
                     <optgroup label="Cormorants"> \
                         <option value="doccor">Double-crested Cormorant</option> \
                     </optgroup> \
                     <optgroup label="Wading Birds and Gruiformes"> \
                         <option value="grbher">Great Blue Heron</option> \
-                        <option value="greegr">Great Egret</option> \
                         <option value="sancra">Sandhill Crane</option> \
                     </optgroup> \
-                    <optgroup label="Raptors"> \
-                        <option value="baleag">Bald Eagle</option> \
-                        <option value="brwhaw">Broad-winged Hawk</option> \
-                        <option value="norhar">Northern Harrier</option> \
-                        <option value="osprey">Osprey</option> \
-                        <option value="turvul">Turkey Vulture</option> \
+                    <optgroup label="Waterfowl"> \
+                        <option value="cangoo">Canada Goose</option> \
+                        <option value="blksco">Black Scoter</option> \
+                        <option value="harduc">Harlequin Duck</option> \
+                        <option value="mallar">Mallard</option> \
+                        <option value="sursco">Surf Scoter</option> \
+                        <option value="whwsco">White-winged Scoter</option> \
                     </optgroup> \
-                    <optgroup label="Shorebirds"> \
-                        <option value="killde">Killdeer</option> \
-                        <option value="pipplo">Piping Plover</option> \
-                        <option value="amewoo">American Woodcock</option> \
+                    <optgroup label="Doves"> \
+                        <option value="moudov">Mourning Dove</option> \
                     </optgroup> \
-                    <optgroup label="Terns"> \
-                        <option value="blkter">Black Terns</option> \
-                        <option value="comter">Common Tern</option> \
+                    <optgroup label="Woodpeckers"> \
+                        <option value="rensap">Red-naped Sapsucker</option> \
                     </optgroup> \
                     <optgroup label="Swifts and Swallows"> \
                         <option value="chiswi">Chimney Swift</option> \
+                        <option value="barswa">Barn Swallow</option> \
+                        <option value="nrwswa">Northern Rough-winged Swallow</option> \
+                        <option value="purmar">Purple Martin</option> \
+                        <option value="treswa">Tree Swallow</option> \
                     </optgroup> \
                     <optgroup label="Hummingbirds"> \
                         <option value="rthhum">Ruby-throated Hummingbird</option> \
                     </optgroup> \
-                    <optgroup label="Kingfishers"> \
-                        <option value="belkin">Belted Kingfisher</option> \
-                    </optgroup> \
                     <optgroup label="Flycatchers"> \
                         <option value="acafly">Acadian Flycatcher</option> \
+                        <option value="easkin">Eastern Kingbird</option> \
+                        <option value="easpho">Eastern Phoebe</option> \
+                        <option value="eawpew">Eastern Wood-Pewee</option> \
+                        <option value="leafly">Least Flycatcher</option> \
+                        <option value="wilfly">Willow Flycatcher</option> \
+                    </optgroup> \
+                    <optgroup label="Vireos"> \
+                        <option value="reevir">Red-eyed Vireo</option> \
+                        <option value="warvir">Warbling Vireo</option> \
+                    </optgroup> \
+                    <optgroup label="Mockingbirds and Thrashers"> \
+                        <option value="brnthr">Brown Thrasher</option> \
+                        <option value="grycat">Gray Catbird</option> \
+                    </optgroup> \
+                    <optgroup label="Wrens"> \
+                        <option value="houwre">House Wren</option> \
+                    </optgroup> \
+                    <optgroup label="Kinglets and Gnatcatchers"> \
+                        <option value="buggna">Blue-gray Gnatcatcher</option> \
+                        <option value="ruckin">Ruby-crowned Kinglet</option> \
+                    </optgroup> \
+                    <optgroup label="Waxwings"> \
+                        <option value="cedwax">Cedar Waxwing</option> \
                     </optgroup> \
                     <optgroup label="Thrushes"> \
+                        <option value="amerob">American Robin</option> \
+                        <option value="swathr">Swainsons Thrush</option> \
+                        <option value="veery">Veery</option> \
+                        <option value="woothr">Wood Thrush</option> \
                     </optgroup> \
                     <optgroup label="Sparrows"> \
+                        <option value="amtspa">American Tree Sparrow</option> \
+                        <option value="daejun">Dark-eyed Junco</option> \
+                        <option value="eastow">Eastern Towhee</option> \
+                        <option value="fiespa">Field Sparrow</option> \
+                        <option value="gnttow">Green-tailed Towhee</option> \
+                        <option value="linspa">Lincoln Sparrow</option> \
+                        <option value="sstspa">Saltmarsh Sparrow</option> \
+                        <option value="sonspa">Song Sparrow</option> \
+                        <option value="swaspa">Swamp Sparrow</option> \
+                        <option value="whcspa">White-crowned Sparrow</option> \
+                        <option value="whtspa">White-throated Sparrow</option> \
                     </optgroup> \
                     <optgroup label="Icterids"> \
                         <option value="balori">Baltimore Oriole</option> \
+                        <option value="boboli">Bobolink</option> \
+                        <option value="easmea">Eastern Meadowlark</option> \
+                        <option value="orcori">Orchard Oriole</option> \
+                        <option value="rewbla">Red-winged Blackbird</option> \
+                    </optgroup> \
+                    <optgroup label="Cardinals and allies"> \
+                        <option value="bkhgro">Black-headed Grosbeak</option> \
+                        <option value="indbun">Indigo Bunting</option> \
+                        <option value="norcar">Northern Cardinal</option> \
+                        <option value="robgro">Rose-breasted Grosbeak</option> \
+                        <option value="scatan">Scarlet Tanager</option> \
                     </optgroup> \
                     <optgroup label="Warblers"> \
+                        <option value="amered">American Redstart</option> \
                         <option value="btbwar">Black-throated Blue Warbler</option> \
+                        <option value="canwar">Canada Warbler</option> \
+                        <option value="chswar">Chestnut-sided Warbler</option> \
+                        <option value="comyel">Common Yellowthroat</option> \
                         <option value="magwar">Magnolia Warbler</option> \
+                        <option value="naswar">Nashville Warbler</option> \
+                        <option value="orcwar">Orange-crowned Warbler</option> \
+                        <option value="palwar">Palm Warbler</option> \
+                        <option value="tenwar">Tennessee Warbler</option> \
                         <option value="yelwar">Yellow Warbler</option> \
                     </optgroup> \
                     <optgroup label="Finches"> \
+                        <option value="amegfi">American Goldfinch</option> \
+                        <option value="houfin">House Finch</option> \
                     </optgroup> \
                 </select>');
 
@@ -152,29 +225,35 @@ function createDataControl(){
     });
     map.addControl(new DataControl());
 
-         //Click listener for buttons
-         $("#birdSelector").change(function(){
-            map.removeLayer(heatmap);
-            
-            $("head").append('<script type="text/javascript" src=js/' + $(this.value).selector + '.js></script>');
-            heatmap = window[($(this.value).selector).toUpperCase() + "_heat_map"];
-            // heatmap = eval(($(this.value).selector).toUpperCase() + "_heat_map");
-    
-            //Change the selected data
-            // if ($(this.value).selector == 'acafly'){
-            //     heatmap = ACAFLY_heat_map; // Acadian Flycatcher
-            // } else if ($(this.value).selector == 'pipplo'){
-            //     heatmap = PIPPLO_heat_map; // Baltimore Oriole
-            // }
+    //Click listener for drop down selections
+    $("#birdSelector").change(function(){
+        var bird = $(this.value).selector;
+        
+        $("#loadingScreen").css("display", "block");
+        $("#spinner").css("display", "block");
 
-            //Update data shown
+        map.removeLayer(heatmap);
+        // $(".secondary").css("display", "none");
+        // $(".legend-control-container").remove();
+
+        setTimeout(function() { // allow spinner to load before work starts
+            if (bird == 'default'){
+                heatmap = heat_map;
+            } else {
+                $("head").append('<script type="text/javascript" src=js/data/' + bird + '.js></script>');
+                heatmap = eval(bird.toUpperCase() + "_heat_map");
+            }
             heatmap.addTo(map);
-        });
+
+            $("#spinner").css("display", "none");
+            $("#loadingScreen").css("display", "none");
+        },0);
+    });
 }
 
 
-
 $(document).ready(createMap);
+
 $(".leaflet-time-control" ).click(function() {
     alert();
     $( ".timecontrol-loop" ).trigger( "click" );
