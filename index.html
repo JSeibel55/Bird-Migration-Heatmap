@@ -10,12 +10,13 @@
         
         <script src="https://cdn.jsdelivr.net/npm/leaflet@1.5.1/dist/leaflet.js"></script>
         <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+        <link rel="stylesheet" href="lib/bootstrap/css/bootstrap.min.css">
+        <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script> -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.5.1/dist/leaflet.css"/>
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css"/>
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css"/>
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css"/>
+        <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css"/> -->
+        <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css"/> -->
+        <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css"/> -->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
         <link rel="stylesheet" href="https://rawcdn.githack.com/python-visualization/folium/master/folium/templates/leaflet.awesome.rotate.css"/>
 
@@ -29,16 +30,53 @@
         <link rel="stylesheet" href="http://apps.socib.es/Leaflet.TimeDimension/dist/leaflet.timedimension.control.min.css"/>
                     
     </head>
-    <body>  
+    <body>
+        <!-- Header Navbar -->
+        <header>
+            <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
+                <div class="container">
+                    <a class="navbar-brand active" style="color: white">Bird Migration Heatmap</a>
+                    <!-- <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button> -->
+                    <div class="collapse navbar-collapse" id="navbarNav">
+                        <ul class="navbar-nav ml-auto">
+                            <!-- <li class="nav-item">
+                                <a class="nav-link" href="../about.html">About</a>
+                            </li> -->
+                            <li class="nav-item">
+                                <a class="nav-link" href="https://jseibel55.github.io/JoshSeibel/">Homepage</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </header>
+
+        <!-- Mobil Modal -->
+        <div class="modal fade" id="mobile-screen" tabindex="-1" role="dialog" aria-labelledby="mobile-screen" aria-hidden="true" data-backdrop="static">
+            <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                <div class="modal-content" id="mobile-screen-content">
+                    <div class="modal-body">
+                        <h6 style="font-weight: bold;">Please use a laptop or desktop.</h6>
+                        <p>At this time, the Bird Migration Heatmap is not built to be viewed on a mobile device.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Loading Screen -->
         <div id="loadingScreen">
             <div id="spinner"></div>
         </div>  
+        <!-- Map -->
         <div class="folium-map" id="map" ></div>
 
         <!--External script links -->
         <script type="text/javascript" src="js/tdheatmap.js"></script>
         <script type="text/javascript" src="js/heat_map.js"></script>
         <script type="text/javascript" src="lib/leaflet/easy-button.js"></script>
+        <script type="text/javascript" src="lib/bootstrap/js/bootstrap.min.js"></script>
         <script type="text/javascript" src="js/main.js"></script>
     </body>
 </html>

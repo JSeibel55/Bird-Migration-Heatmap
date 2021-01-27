@@ -82,8 +82,8 @@ function createDataControl(){
             //create radio button for the two data
             $(container).append(
                 '<select name="birdSelector" id="birdSelector"> \
-                <option value="default">-- Choose a bird --</option> \
-                <optgroup label="Raptors"> \
+                    <option value="default">-- Choose a bird --</option> \
+                    <optgroup label="Raptors"> \
                         <option value="amekes">American Kestrel</option> \
                         <option value="baleag">Bald Eagle</option> \
                         <option value="coohaw">Coopers Hawk</option> \
@@ -117,6 +117,7 @@ function createDataControl(){
                         <option value="sancra">Sandhill Crane</option> \
                     </optgroup> \
                     <optgroup label="Waterfowl"> \
+                        <option value="truswa">Trumpeter Swan</option> \
                         <option value="cangoo">Canada Goose</option> \
                         <option value="blksco">Black Scoter</option> \
                         <option value="harduc">Harlequin Duck</option> \
@@ -251,10 +252,21 @@ function createDataControl(){
     });
 }
 
-
+// Open popup wanring to view on desktop if user opens in mobile
+$(window).on("resize load", function () {
+    if ($( window ).width() <= 600) {
+        $('#mobile-screen').modal('show');
+    } else if ($( window ).width() > 600){
+        $('#mobile-screen').modal('hide');
+    }
+});
 $(document).ready(createMap);
+$(document).ready(function(){
+    $( "a.timecontrol-loop" ).toggleClass( "looped" );
+});
+$(document).on('click', function(e) { console.log(e.type)});
 
-$(".leaflet-time-control" ).click(function() {
+$("a.timecontrol-play" ).toggleClass("play", function() {
     alert();
-    $( ".timecontrol-loop" ).trigger( "click" );
+    ( "a.timecontrol-loop" ).toggleClass( "looped" );
 });
