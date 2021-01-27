@@ -6,20 +6,16 @@ html, body {width: 100%;height: 100%;margin: 0;padding: 0;}
 }
 .navbar-brand{
   font-size: 24px;
-  margin-left: -10%;
-}
-#navbarNav {
-  margin-right: -5%;
+  padding-left: 10px;
 }
 .nav-link{
-  margin-left: 10px;
   margin-right: 10px;
 }
 @media screen and (max-width: 1500px) {
   .navbar-brand {margin-left: 0px;}
 }
 
-/* #map {position:absolute;top:0;bottom:0;right:0;left:0;} */
+/* Map and Features */
 #map {
   position: relative;
   width: 100%;
@@ -32,13 +28,26 @@ html, body {width: 100%;height: 100%;margin: 0;padding: 0;}
 
 #birdSelector {
   font-family: Georgia, serif;
-  font-size: 20px;
-  padding: 3px;
+  font-size: 3vh;
   background-color: rgb(255, 255, 255);
 }
-select, option { height: 20%; }
+
+select, option { 
+  font-size: 3vh;
+}
+.custom-select.open{
+  max-height: 40vh !important;
+  overflow: hidden;
+}
+@media screen and (max-width: 1000px) {
+  #birdSelector {font-size: 2vh;}
+  select, option {font-size: 2vh;}
+}
 
 /*** Time Control ***/
+.leaflet-bar{
+
+}
 .timecontrol-date {
   font-size: 20px;
 }

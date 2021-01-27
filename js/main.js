@@ -54,7 +54,7 @@ function timeControl(){
         forwardButton: true,
         limitMinimumRange: 5,
         limitSliders: true,
-        loopButton: true,
+        loopButton: false,
         maxSpeed: 10,
         minSpeed: 0.1,
         playButton: true,
@@ -65,7 +65,10 @@ function timeControl(){
         styleNS: "leaflet-control-timecontrol",
         timeSlider: true,
         timeSliderDrapUpdate: false,
-        timeSteps: 1
+        timeSteps: 1,
+        playerOptions: {
+            loop: true
+        }
     }).addTo(map);
 }
 
@@ -79,10 +82,10 @@ function createDataControl(){
             // create the control container div with a particular class name
             var container = L.DomUtil.create('div', 'data-control-container');
 
-            //create radio button for the two data
+            //create dropdown for bird data
             $(container).append(
-                '<select name="birdSelector" id="birdSelector"> \
-                    <option value="default">-- Choose a bird --</option> \
+                '<select class="custom-select" id="birdSelector"> \
+                    <option value="default">-- Select a bird --</option> \
                     <optgroup label="Raptors"> \
                         <option value="amekes">American Kestrel</option> \
                         <option value="baleag">Bald Eagle</option> \
@@ -231,11 +234,9 @@ function createDataControl(){
         var bird = $(this.value).selector;
         
         $("#loadingScreen").css("display", "block");
-        $("#spinner").css("display", "block");
+        $("#spinner").css("display", "block");       
 
         map.removeLayer(heatmap);
-        // $(".secondary").css("display", "none");
-        // $(".legend-control-container").remove();
 
         setTimeout(function() { // allow spinner to load before work starts
             if (bird == 'default'){
@@ -254,19 +255,10 @@ function createDataControl(){
 
 // Open popup wanring to view on desktop if user opens in mobile
 $(window).on("resize load", function () {
-    if ($( window ).width() <= 600) {
+    if ($( window ).width() <= 500) {
         $('#mobile-screen').modal('show');
-    } else if ($( window ).width() > 600){
+    } else if ($( window ).width() > 500){
         $('#mobile-screen').modal('hide');
     }
 });
 $(document).ready(createMap);
-$(document).ready(function(){
-    $( "a.timecontrol-loop" ).toggleClass( "looped" );
-});
-$(document).on('click', function(e) { console.log(e.type)});
-
-$("a.timecontrol-play" ).toggleClass("play", function() {
-    alert();
-    ( "a.timecontrol-loop" ).toggleClass( "looped" );
-});
