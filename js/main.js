@@ -29,7 +29,7 @@ function createMap(){
     //add OSM base tilelayer
     var tile_layer = L.tileLayer(
         'https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}',
-        { "attribution": 'Tiles &copy; Esri &mdash; Esri'}
+        { "attribution": 'Tiles &copy; Esri | Data &copy; eBird Basic Dataset. Cornell Lab of Ornithology'}
     ).addTo(map);
 
     // Create Tools
